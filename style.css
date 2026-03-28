@@ -1,0 +1,289 @@
+/* Add this to your style.css */
+html {
+  scroll-behavior: smooth; /* Modern way to handle smooth scroll */
+  scroll-padding-top: 80px; /* Match this to your header's height */
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  line-height: 1.6;
+}
+
+/* --- Revised Header/Navigation Layout --- */
+header { 
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: white;
+  padding: 0rem 1rem; /* Added padding to prevent content from touching screen edges */
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  /* Crucial: Allow wrapping on small screens */
+  flex-wrap: wrap; 
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  /* Add margin to separate from the navigation links when they wrap */
+  margin-right: 1rem; 
+}
+
+.logo1 {
+  width: 80px;
+  height: 80px;
+}
+
+.logo2 {
+  width: 180px;
+  height: 65px;
+}
+
+/* Updated Nav/Links styling for responsiveness */
+.nav-links {
+  display: flex;
+  flex-wrap: wrap; 
+  /* Ensures navigation takes up remaining space and wraps gracefully */
+  justify-content: flex-start; 
+  margin: 0.5rem 0; /* Add vertical margin for separation on wrap */
+}
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-links a {
+  color: #2b2a29;
+  padding: 0.5rem 0.75rem; /* Reduced padding for smaller screens */
+  text-decoration: none;
+  transition: background 0.3s;
+  /* Ensures links stay readable on one line before forcing a wrap */
+  white-space: nowrap; 
+}
+
+.nav-links a:hover {
+  background: #e31e24; 
+  color: #fff; /* Added white color for better contrast on red hover */
+}
+
+
+
+/* ------------------------------------------- */
+/* RESPONSIVENESS BREAKPOINTS        */
+/* ------------------------------------------- */
+
+/* Media Query for Mobile/Small Screens (Less than 768px) */
+@media (max-width: 860px) {
+.logo1 {
+  width: 65px;
+  height: 65px;
+ }
+
+ .logo2 {
+  width: 145px;
+  height: 65px;
+ }
+  .menu-toggle {
+    display: block;
+  }
+ 
+ .nav-links {
+    position: fixed;
+    z-index: 1;
+    top: -8px;
+    right: -250px; 
+    width: 250px;
+    height: 100%;
+    background: #000000;
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 20px;
+    transition: right 0.3s ease;
+  } 
+
+  .nav-links a {
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+  } 
+
+  .nav-links.active {
+    right: 0; /* slide in */
+  }
+}
+
+/* --- Content Sections --- */
+section {
+    padding: 1rem 5%; 
+    background-color: #e0dbdb;/* Use percentage for horizontal padding on all sections */
+}
+
+/* --- Products Section --- */
+/* #products {
+    padding: 3rem 1.5rem;
+    background: #f9f9f9;
+    text-align: center;
+} */
+
+#products h1 {
+    margin-bottom: 0.5rem;
+    color: #2b2a29;
+}
+
+h2{
+  margin-bottom: 0.5rem;
+}
+/* Flex Container */
+.products {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    justify-content: center; /* Center align cards */
+    gap: 2rem; /* Space between cards */
+}
+
+/* Individual Product Card */
+.product {
+    flex: 1 1 calc(33.33% - 2rem); /* Maximum 3 columns */
+    max-width: 300px; /* Optional: limit max width of each card */
+}
+
+.product-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(227, 30, 36, 0.4);
+}
+
+/* Product Image */
+.product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.1);
+}
+
+/* Product Title below image */
+.product-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #2b2a29;
+    padding: 0.8rem 1rem;
+}
+
+/* Overlay for extra details */
+.product-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #e31e24;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.4s ease;
+    padding: 1rem;
+}
+
+.product-card:hover .product-overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+
+.product-overlay p {
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+/* --- Mobile Responsive --- */
+@media screen and (max-width: 992px) {
+    .product {
+        flex: 1 1 calc(50% - 2rem); /* 2 columns on tablets */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .product {
+        flex: 1 1 100%; /* 1 column on mobile */
+    }
+
+    .product-image {
+        height: 180px;
+    }
+
+    .product-title {
+        font-size: 1rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .product-overlay p {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+footer {
+    /* Layout & Spacing */
+    text-align: center;
+    padding: 3rem 1rem; /* Increased vertical padding for more space */
+    
+    /* Colors & Background */
+    background: #1c1c1c; /* Darker, sleek background for a premium look */
+    color: #f0f0f0; /* Slightly off-white for softer contrast */
+    
+    /* Visual Depth & Separator */
+    /* margin-top: 4rem; */
+    border-top: 5px solid #e31e24; /* A vibrant accent line (replace with your brand color) */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3); /* Subtle upward shadow for depth */
+    
+    /* Text & Font */
+    font-family: 'Arial', sans-serif; /* Specify a readable font */
+    font-size: 0.9rem; /* Slightly smaller text for copyright */
+    line-height: 1.6; /* Better line spacing */
+}
+
+/* Style for the copyright text within the footer */
+footer p {
+    margin: 0;
+    padding-bottom: 0.5rem; /* Add a little space below the main text */
+}
+
+/* If you have link classes like .footer-links from the previous response: */
+.footer-links a {
+    color: #f0f0f0; /* Ensure links are visible */
+    text-decoration: none;
+    padding: 0 1rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #e31e24; /* Links change to the accent color on hover */
+}
